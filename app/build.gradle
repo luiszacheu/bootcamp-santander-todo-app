@@ -34,21 +34,20 @@ android {
 
 dependencies {
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.5.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.versionKotlin"
+    implementation "androidx.core:core-ktx:$versionKTX"
+    implementation "androidx.appcompat:appcompat:$versionAppCompat"
+    implementation "com.google.android.material:material:$versionMaterial"
+    implementation "androidx.constraintlayout:constraintlayout:$versionConstraintLayout"
 
     //Dependencias do Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation "com.squareup.retrofit2:retrofit:$versionRetrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$versionRetrofit"
 
     //Dependencia do GSON
-    implementation 'com.google.code.gson:gson:2.8.7'
+    implementation "com.google.code.gson:gson:$versionGson"
 
-
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation "junit:junit:$versionJUnit"
+    androidTestImplementation "androidx.test.ext:junit:$versionAndroidXJUnit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$versionExpresso"
 }
