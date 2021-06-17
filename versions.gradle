@@ -8,6 +8,7 @@ ext {
 
     //Retrofit
     versionRetrofit = '2.9.0'
+    versionRetrofitInterceptor = "4.3.1"
 
     //GSON
     versionGson = '2.8.7'
