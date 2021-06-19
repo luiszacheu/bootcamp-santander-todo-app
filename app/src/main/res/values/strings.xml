@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">App TODO List</string>
+    <string name="app_name">App Tarefas</string>
+    <string name="create_todo_screen">Criar Tarefa</string>
+    <string name="detail_todo_screen">Detalhes Tarefa</string>
+    <string name="content_description_add_todo">Cadastrar tarefa</string>
 </resources>
