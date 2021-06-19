@@ -1,4 +1,4 @@
-package bootcamp.snt.bootcampsantandertodo.features
+package bootcamp.snt.bootcampsantandertodo.features.features
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

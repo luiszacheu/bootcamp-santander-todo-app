@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BootcampSantanderTODO">
-        <activity android:name=".features.ListTodosActivity">
+        <activity android:name=".features.features.ListTodosActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,11 +17,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".features.CreateTodoActivity"
-            android:parentActivityName=".features.ListTodosActivity"/>
+        <activity android:name=".features.features.CreateTodoActivity"
+            android:parentActivityName=".features.features.ListTodosActivity"/>
 
-        <activity android:name=".features.DetailTodoActivity"
-            android:parentActivityName=".features.ListTodosActivity"/>
+        <activity android:name=".features.features.DetailTodoActivity"
+            android:parentActivityName=".features.features.ListTodosActivity"/>
     </application>
 
 </manifest>

@@ -42,6 +42,8 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$versionAppCompat"
     implementation "com.google.android.material:material:$versionMaterial"
     implementation "androidx.constraintlayout:constraintlayout:$versionConstraintLayout"
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+
     testImplementation "junit:junit:$versionJUnit"
     androidTestImplementation "androidx.test.ext:junit:$versionAndroidXJUnit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$versionExpresso"
