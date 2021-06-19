@@ -1,5 +1,6 @@
 package bootcamp.snt.bootcampsantandertodo.features.features.detailTodo
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import bootcamp.snt.bootcampsantandertodo.R
@@ -13,6 +14,8 @@ class DetailTodoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailTodoBinding
 
     private lateinit var todo: Todo
+
+    private var positionOfTodo: Int? = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,25 +31,29 @@ class DetailTodoActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
         }
 
+        positionOfTodo = intent.extras?.getInt(Constants.KEY_EXTRA_TODO_INDEX)
         intent.extras?.getInt(Constants.KEY_EXTRA_TODO_ID)?.let { todoId ->
             popularTela(todoId)
         }
 
         binding.btnRemove.setOnClickListener {
-            removeTodo(todo)
+            removeTodo(todo, positionOfTodo)
         }
     }
 
-    private fun removeTodo(todo: Todo) {
+    private fun removeTodo(todo: Todo, position: Int?) {
         DataSourceLocal.removeTodo(todo)
-        setResult(Constants.CODE_RESULT_REMOVE_SUCCESS)
+        val data = Intent()
+        data.putExtra(Constants.KEY_EXTRA_TODO_INDEX, position)
+        setResult(Constants.CODE_RESULT_REMOVE_SUCCESS, data)
         finish()
     }
 
     private fun popularTela(idTodo: Int) {
         todo = DataSourceLocal.getTodoById(idTodo)
         binding.apply {
-            tvHeader.text = String.format(getString(R.string.detail_todo_tv_header_text, todo.title, todo.id))
+            tvHeader.text =
+                String.format(getString(R.string.detail_todo_tv_header_text, todo.title, todo.id))
             tvTitleTodoValue.text = todo.title
             tvDescriptionTodoValue.text = todo.description
         }

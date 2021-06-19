@@ -14,6 +14,7 @@ import bootcamp.snt.bootcampsantandertodo.features.features.addTodo.CreateTodoAc
 import bootcamp.snt.bootcampsantandertodo.features.features.detailTodo.DetailTodoActivity
 import bootcamp.snt.bootcampsantandertodo.features.model.Todo
 import bootcamp.snt.bootcampsantandertodo.features.utils.Constants
+import java.text.FieldPosition
 
 class ListTodosActivity : AppCompatActivity() {
 
@@ -28,9 +29,9 @@ class ListTodosActivity : AppCompatActivity() {
         when(result.resultCode) {
             Constants.CODE_RESULT_CREATE_SUCCESS -> todoListAdapter.notifyDataSetChanged()
             Constants.CODE_RESULT_REMOVE_SUCCESS -> {
-//                result.data?.getIntExtra("index", 0)?.let {
-                    todoListAdapter.removeTodo()
-//                }
+                result.data?.getIntExtra(Constants.KEY_EXTRA_TODO_INDEX, 0)?.let {
+                    todoListAdapter.removeTodo(it)
+                }
             }
         }
     }
@@ -51,21 +52,23 @@ class ListTodosActivity : AppCompatActivity() {
             createActivityLauncher.launch(intent)
         }
 
-        todoListAdapter = TodoListAdapter { todo ->
-            detailTodo(todo.id)
+        todoListAdapter = TodoListAdapter { todo, position ->
+            detailTodo(todo.id, position)
         }
 
         binding.rvListTodos.apply {
             adapter = todoListAdapter
             layoutManager = LinearLayoutManager(this@ListTodosActivity)
         }
+        todoListAdapter.updateList(DataSourceLocal.getTodoList())
     }
 
 
-    private fun detailTodo(todoId: Int){
+    private fun detailTodo(todoId: Int, position: Int){
         val intent = Intent(this, DetailTodoActivity::class.java)
         intent.putExtra(Constants.KEY_EXTRA_TODO_ID, todoId)
-        startActivity(intent)
+        intent.putExtra(Constants.KEY_EXTRA_TODO_INDEX, position)
+        createActivityLauncher.launch(intent)
     }
 
 }

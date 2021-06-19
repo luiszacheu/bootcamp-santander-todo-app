@@ -8,16 +8,15 @@ import bootcamp.snt.bootcampsantandertodo.features.data.DataSourceLocal
 import bootcamp.snt.bootcampsantandertodo.features.model.Todo
 
 class TodoListAdapter(
-    private val onClick: (Todo) -> Unit
-) :
-    RecyclerView.Adapter<TodoListAdapter.ViewHolder>() {
+    private val onClick: (Todo, Int) -> Unit
+) : RecyclerView.Adapter<TodoListAdapter.ViewHolder>() {
 
-    private val todoList = DataSourceLocal.getTodoList()
+    private var todoList = mutableListOf<Todo>()
 
-    inner class ViewHolder(private val binding: AdapterTodoBinding, val onClick: (Todo) -> Unit) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(todo: Todo){
+    inner class ViewHolder(private val binding: AdapterTodoBinding, val onClick: (Todo, Int) -> Unit) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(todo: Todo, position: Int){
             binding.root.setOnClickListener {
-                onClick(todo)
+                onClick(todo, position)
             }
 
             binding.apply {
@@ -27,14 +26,12 @@ class TodoListAdapter(
         }
     }
 
-    fun updateList() {
-        todoList.clear()
-        todoList.addAll(DataSourceLocal.getTodoList())
+    fun updateList(listOfTodos: MutableList<Todo>) {
+        todoList = listOfTodos
     }
 
-    fun removeTodo() {
-        updateList()
-        notifyDataSetChanged()
+    fun removeTodo(position: Int) {
+        notifyItemRemoved(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,8 +41,7 @@ class TodoListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val todo = todoList[position]
-        holder.bind(todo)
-
+        holder.bind(todo, position)
     }
 
     override fun getItemCount(): Int {
