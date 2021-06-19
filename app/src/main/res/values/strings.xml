@@ -3,4 +3,11 @@
     <string name="create_todo_screen">Criar Tarefa</string>
     <string name="detail_todo_screen">Detalhes Tarefa</string>
     <string name="content_description_add_todo">Cadastrar tarefa</string>
+    <string name="title_todo">Titulo da tarefa</string>
+    <string name="content_todo">Descrição da tarefa</string>
+    <string name="create_todo">Criar Tarefa</string>
+    
+<!--    DETALHE TODO    -->
+    <string name="detail_todo_tv_header_text">#%2$d - %1$s</string>
+    <string name="remove_todo">Remover Tarefa</string>
 </resources>

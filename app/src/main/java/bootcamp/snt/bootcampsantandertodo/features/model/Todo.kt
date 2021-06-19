@@ -1,8 +1,8 @@
 package bootcamp.snt.bootcampsantandertodo.features.model
 
 data class Todo(
-    val id: Long,
+    val id: Int,
     val title: String,
-    val content: String,
+    val description: String,
     val done: Boolean
 )

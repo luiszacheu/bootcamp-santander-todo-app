@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,5 +14,66 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Tarefa (id: #1)"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tvTitleTodoLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Titulo:"
+        app:layout_constraintStart_toStartOf="@+id/tvHeader"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeader" />
+
+    <TextView
+        android:id="@+id/tvTitleTodoValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/tvTitleTodoLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleTodoLabel" />
+
+    <TextView
+        android:id="@+id/tvDescriptionTodoLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Descrição:"
+        app:layout_constraintStart_toStartOf="@+id/tvTitleTodoValue"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleTodoValue" />
+
+    <TextView
+        android:id="@+id/tvDescriptionTodoValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/tvDescriptionTodoLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescriptionTodoLabel" />
+
+
+    <Button
+        android:id="@+id/btnRemove"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/remove_todo"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescriptionTodoValue"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

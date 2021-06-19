@@ -1,12 +1,19 @@
-package bootcamp.snt.bootcampsantandertodo.features.features
+package bootcamp.snt.bootcampsantandertodo.features.features.listTodo
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import bootcamp.snt.bootcampsantandertodo.R
 import bootcamp.snt.bootcampsantandertodo.databinding.ActivityListTodoBinding
+import bootcamp.snt.bootcampsantandertodo.features.data.DataSourceLocal
+import bootcamp.snt.bootcampsantandertodo.features.features.addTodo.CreateTodoActivity
+import bootcamp.snt.bootcampsantandertodo.features.features.detailTodo.DetailTodoActivity
 import bootcamp.snt.bootcampsantandertodo.features.model.Todo
+import bootcamp.snt.bootcampsantandertodo.features.utils.Constants
 
 class ListTodosActivity : AppCompatActivity() {
 
@@ -14,6 +21,19 @@ class ListTodosActivity : AppCompatActivity() {
     private lateinit var binding: ActivityListTodoBinding
 
     private lateinit var todoListAdapter: TodoListAdapter
+
+    private val createActivityLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) { result ->
+
+        when(result.resultCode) {
+            Constants.CODE_RESULT_CREATE_SUCCESS -> todoListAdapter.notifyDataSetChanged()
+            Constants.CODE_RESULT_REMOVE_SUCCESS -> {
+//                result.data?.getIntExtra("index", 0)?.let {
+                    todoListAdapter.removeTodo()
+//                }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,25 +48,24 @@ class ListTodosActivity : AppCompatActivity() {
         //Adicionando evento de click no botão para adicionar nova tarefa
         binding.fabAdd.setOnClickListener {
             val intent = Intent(this@ListTodosActivity, CreateTodoActivity::class.java)
-            startActivity(intent)
+            createActivityLauncher.launch(intent)
         }
 
-        todoListAdapter = TodoListAdapter(getTodoList())
+        todoListAdapter = TodoListAdapter { todo ->
+            detailTodo(todo.id)
+        }
+
         binding.rvListTodos.apply {
             adapter = todoListAdapter
             layoutManager = LinearLayoutManager(this@ListTodosActivity)
         }
     }
 
-    fun getTodoList() : List<Todo> {
-        return listOf(
-            Todo(1, "Titulo 1", "Conteúdo 1", false),
-            Todo(2, "Titulo 2", "Conteúdo 2", false),
-            Todo(3, "Titulo 3", "Conteúdo 3", false),
-            Todo(4, "Titulo 4", "Conteúdo 4", false),
-            Todo(5, "Titulo 5", "Conteúdo 5", false)
-        )
-    }
 
+    private fun detailTodo(todoId: Int){
+        val intent = Intent(this, DetailTodoActivity::class.java)
+        intent.putExtra(Constants.KEY_EXTRA_TODO_ID, todoId)
+        startActivity(intent)
+    }
 
 }
