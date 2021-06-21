@@ -1,12 +1,14 @@
 package bootcamp.snt.bootcampsantandertodo.features.features.addTodo
 
 import android.os.Bundle
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import bootcamp.snt.bootcampsantandertodo.R
 import bootcamp.snt.bootcampsantandertodo.databinding.ActivityCreateTodoBinding
 import bootcamp.snt.bootcampsantandertodo.features.data.DataSourceLocal
 import bootcamp.snt.bootcampsantandertodo.features.model.Todo
 import bootcamp.snt.bootcampsantandertodo.features.utils.Constants
+import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 
 class CreateTodoActivity : AppCompatActivity() {
@@ -42,14 +44,14 @@ class CreateTodoActivity : AppCompatActivity() {
 
     private fun setErrorIfFieldsNotFill(title: String, description: String): Boolean {
         if (title.isBlank()) {
-            binding.tilTitleTodo.error = "Campo obrigatório!"
+            binding.tilTitleTodo.error = getString(R.string.message_required_field)
             return false
         } else {
             binding.tilTitleTodo.error = null
         }
 
         if (description.isBlank()) {
-            binding.tilDescriptionTodo.error = "Campo obrigatório"
+            binding.tilDescriptionTodo.error = getString(R.string.message_required_field)
             return false
         } else {
             binding.tilDescriptionTodo.error = null
@@ -59,7 +61,7 @@ class CreateTodoActivity : AppCompatActivity() {
     }
 
     private fun createNewTodo(title: String, description: String) {
-        val todo = Todo(Random(1000L).nextInt(), title, description, false)
+        val todo = Todo(Random(100L).nextInt(), title, description, false)
         DataSourceLocal.createTodo(todo)
         setResult(Constants.CODE_RESULT_CREATE_SUCCESS)
         finish()

@@ -33,7 +33,7 @@ class DetailTodoActivity : AppCompatActivity() {
 
         positionOfTodo = intent.extras?.getInt(Constants.KEY_EXTRA_TODO_INDEX)
         intent.extras?.getInt(Constants.KEY_EXTRA_TODO_ID)?.let { todoId ->
-            popularTela(todoId)
+            showDataFromDataSource(todoId)
         }
 
         binding.btnRemove.setOnClickListener {
@@ -49,7 +49,7 @@ class DetailTodoActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun popularTela(idTodo: Int) {
+    private fun showDataFromDataSource(idTodo: Int) {
         todo = DataSourceLocal.getTodoById(idTodo)
         binding.apply {
             tvHeader.text =

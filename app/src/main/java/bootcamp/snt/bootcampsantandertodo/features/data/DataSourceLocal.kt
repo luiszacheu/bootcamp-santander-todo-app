@@ -1,13 +1,11 @@
 package bootcamp.snt.bootcampsantandertodo.features.data
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import bootcamp.snt.bootcampsantandertodo.features.model.Todo
 
 object DataSourceLocal {
     private val todoList = initialList()
 
-    fun getTodoList() : MutableList<Todo> {
+    fun getAllTodos() : MutableList<Todo> {
         return todoList
     }
 
@@ -16,7 +14,7 @@ object DataSourceLocal {
     }
 
     fun getTodoById(id: Int): Todo {
-        return todoList.first { it.id == id }
+        return todoList.single { it.id == id }
     }
 
     fun createTodo(newTodo: Todo){

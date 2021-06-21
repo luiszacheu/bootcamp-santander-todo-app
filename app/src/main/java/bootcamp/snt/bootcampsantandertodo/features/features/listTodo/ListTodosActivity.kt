@@ -1,9 +1,7 @@
 package bootcamp.snt.bootcampsantandertodo.features.features.listTodo
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,9 +10,7 @@ import bootcamp.snt.bootcampsantandertodo.databinding.ActivityListTodoBinding
 import bootcamp.snt.bootcampsantandertodo.features.data.DataSourceLocal
 import bootcamp.snt.bootcampsantandertodo.features.features.addTodo.CreateTodoActivity
 import bootcamp.snt.bootcampsantandertodo.features.features.detailTodo.DetailTodoActivity
-import bootcamp.snt.bootcampsantandertodo.features.model.Todo
 import bootcamp.snt.bootcampsantandertodo.features.utils.Constants
-import java.text.FieldPosition
 
 class ListTodosActivity : AppCompatActivity() {
 
@@ -52,15 +48,19 @@ class ListTodosActivity : AppCompatActivity() {
             createActivityLauncher.launch(intent)
         }
 
+        // Instanciando o adapter para setarmos na instancia de recyclerView
         todoListAdapter = TodoListAdapter { todo, position ->
             detailTodo(todo.id, position)
         }
 
+        // Instanciando RecyclerView e passando uma lista de itens iniciais
         binding.rvListTodos.apply {
             adapter = todoListAdapter
             layoutManager = LinearLayoutManager(this@ListTodosActivity)
+            todoListAdapter.updateList(DataSourceLocal.getAllTodos())
         }
-        todoListAdapter.updateList(DataSourceLocal.getTodoList())
+
+
     }
 
 

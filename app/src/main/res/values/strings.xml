@@ -2,12 +2,18 @@
     <string name="app_name">App Tarefas</string>
     <string name="create_todo_screen">Criar Tarefa</string>
     <string name="detail_todo_screen">Detalhes Tarefa</string>
+
+    <string name="message_required_field">Campo obrigatório!</string>
+
+    <!--    Tela criar tarefa-->
     <string name="content_description_add_todo">Cadastrar tarefa</string>
     <string name="title_todo">Titulo da tarefa</string>
     <string name="content_todo">Descrição da tarefa</string>
     <string name="create_todo">Criar Tarefa</string>
     
-<!--    DETALHE TODO    -->
+    <!--    Tela detalhe da tarefa   -->
     <string name="detail_todo_tv_header_text">#%2$d - %1$s</string>
     <string name="remove_todo">Remover Tarefa</string>
+
+
 </resources>
