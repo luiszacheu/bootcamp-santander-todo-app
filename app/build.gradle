@@ -44,6 +44,16 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$versionConstraintLayout"
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
+
+    //Dependencias do Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$versionRetrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$versionRetrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versionRetrofitInterceptor"
+
+
+    //Dependencia do GSON
+    implementation "com.google.code.gson:gson:$versionGson"
+
     testImplementation "junit:junit:$versionJUnit"
     androidTestImplementation "androidx.test.ext:junit:$versionAndroidXJUnit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$versionExpresso"

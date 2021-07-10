@@ -5,6 +5,15 @@ ext {
     versionMaterial = '1.3.0'
     versionConstraintLayout = '2.0.4'
     versionJUnit = '4.13.2'
+
+    //Retrofit
+    versionRetrofit = '2.9.0'
+    versionRetrofitInterceptor = "4.3.1"
+
+    //GSON
+    versionGson = '2.8.7'
+
+    //Dependências para testes
     versionAndroidXJUnit = '1.1.2'
     versionExpresso = '3.3.0'
 }
