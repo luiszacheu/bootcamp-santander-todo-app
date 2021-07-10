@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import bootcamp.snt.bootcampsantandertodo.R
 import bootcamp.snt.bootcampsantandertodo.databinding.ActivityListTodoBinding
 import bootcamp.snt.bootcampsantandertodo.data.DataSourceLocal
+import bootcamp.snt.bootcampsantandertodo.data.DataSourceRemote
 import bootcamp.snt.bootcampsantandertodo.features.addTodo.CreateTodoActivity
 import bootcamp.snt.bootcampsantandertodo.features.detailTodo.DetailTodoActivity
 import bootcamp.snt.bootcampsantandertodo.utils.Constants
@@ -39,6 +40,8 @@ class ListTodosActivity : AppCompatActivity() {
         binding = ActivityListTodoBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        DataSourceRemote().getAll()
 
         binding.toolbar.title = getString(R.string.app_name)
 
