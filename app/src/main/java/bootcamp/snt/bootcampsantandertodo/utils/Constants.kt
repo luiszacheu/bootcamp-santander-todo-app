@@ -1,4 +1,4 @@
-package bootcamp.snt.bootcampsantandertodo.features.utils
+package bootcamp.snt.bootcampsantandertodo.utils
 
 object Constants {
 

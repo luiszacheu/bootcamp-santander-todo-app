@@ -1,13 +1,13 @@
-package bootcamp.snt.bootcampsantandertodo.features.features.detailTodo
+package bootcamp.snt.bootcampsantandertodo.features.detailTodo
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import bootcamp.snt.bootcampsantandertodo.R
 import bootcamp.snt.bootcampsantandertodo.databinding.ActivityDetailTodoBinding
-import bootcamp.snt.bootcampsantandertodo.features.data.DataSourceLocal
-import bootcamp.snt.bootcampsantandertodo.features.model.Todo
-import bootcamp.snt.bootcampsantandertodo.features.utils.Constants
+import bootcamp.snt.bootcampsantandertodo.data.DataSourceLocal
+import bootcamp.snt.bootcampsantandertodo.model.Todo
+import bootcamp.snt.bootcampsantandertodo.utils.Constants
 
 class DetailTodoActivity : AppCompatActivity() {
 

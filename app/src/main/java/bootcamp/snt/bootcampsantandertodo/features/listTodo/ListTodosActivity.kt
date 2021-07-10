@@ -1,4 +1,4 @@
-package bootcamp.snt.bootcampsantandertodo.features.features.listTodo
+package bootcamp.snt.bootcampsantandertodo.features.listTodo
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import bootcamp.snt.bootcampsantandertodo.R
 import bootcamp.snt.bootcampsantandertodo.databinding.ActivityListTodoBinding
-import bootcamp.snt.bootcampsantandertodo.features.data.DataSourceLocal
-import bootcamp.snt.bootcampsantandertodo.features.features.addTodo.CreateTodoActivity
-import bootcamp.snt.bootcampsantandertodo.features.features.detailTodo.DetailTodoActivity
-import bootcamp.snt.bootcampsantandertodo.features.utils.Constants
+import bootcamp.snt.bootcampsantandertodo.data.DataSourceLocal
+import bootcamp.snt.bootcampsantandertodo.features.addTodo.CreateTodoActivity
+import bootcamp.snt.bootcampsantandertodo.features.detailTodo.DetailTodoActivity
+import bootcamp.snt.bootcampsantandertodo.utils.Constants
 
 class ListTodosActivity : AppCompatActivity() {
 
@@ -59,10 +59,7 @@ class ListTodosActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@ListTodosActivity)
             todoListAdapter.updateList(DataSourceLocal.getAllTodos())
         }
-
-
     }
-
 
     private fun detailTodo(todoId: Int, position: Int){
         val intent = Intent(this, DetailTodoActivity::class.java)

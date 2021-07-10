@@ -1,6 +1,6 @@
-package bootcamp.snt.bootcampsantandertodo.features.data
+package bootcamp.snt.bootcampsantandertodo.data
 
-import bootcamp.snt.bootcampsantandertodo.features.model.Todo
+import bootcamp.snt.bootcampsantandertodo.model.Todo
 
 object DataSourceLocal {
     private val todoList = initialList()

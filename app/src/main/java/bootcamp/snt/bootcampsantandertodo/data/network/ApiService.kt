@@ -1,4 +1,4 @@
-package bootcamp.snt.bootcampsantandertodo.network
+package bootcamp.snt.bootcampsantandertodo.data.network
 
 import retrofit2.http.*
 

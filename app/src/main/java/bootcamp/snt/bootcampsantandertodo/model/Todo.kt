@@ -1,4 +1,4 @@
-package bootcamp.snt.bootcampsantandertodo.features.model
+package bootcamp.snt.bootcampsantandertodo.model
 
 data class Todo(
     val id: Int,

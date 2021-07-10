@@ -1,11 +1,10 @@
-package bootcamp.snt.bootcampsantandertodo.features.features.listTodo
+package bootcamp.snt.bootcampsantandertodo.features.listTodo
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import bootcamp.snt.bootcampsantandertodo.databinding.AdapterTodoBinding
-import bootcamp.snt.bootcampsantandertodo.features.data.DataSourceLocal
-import bootcamp.snt.bootcampsantandertodo.features.model.Todo
+import bootcamp.snt.bootcampsantandertodo.model.Todo
 
 class TodoListAdapter(
     private val onClick: (Todo, Int) -> Unit

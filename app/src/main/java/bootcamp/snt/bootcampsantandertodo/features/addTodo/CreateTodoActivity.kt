@@ -1,14 +1,12 @@
-package bootcamp.snt.bootcampsantandertodo.features.features.addTodo
+package bootcamp.snt.bootcampsantandertodo.features.addTodo
 
 import android.os.Bundle
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import bootcamp.snt.bootcampsantandertodo.R
 import bootcamp.snt.bootcampsantandertodo.databinding.ActivityCreateTodoBinding
-import bootcamp.snt.bootcampsantandertodo.features.data.DataSourceLocal
-import bootcamp.snt.bootcampsantandertodo.features.model.Todo
-import bootcamp.snt.bootcampsantandertodo.features.utils.Constants
-import com.google.android.material.textfield.TextInputLayout
+import bootcamp.snt.bootcampsantandertodo.data.DataSourceLocal
+import bootcamp.snt.bootcampsantandertodo.model.Todo
+import bootcamp.snt.bootcampsantandertodo.utils.Constants
 import java.util.*
 
 class CreateTodoActivity : AppCompatActivity() {
