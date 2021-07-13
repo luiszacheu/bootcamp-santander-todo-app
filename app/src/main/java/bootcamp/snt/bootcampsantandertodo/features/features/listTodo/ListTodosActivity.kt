@@ -59,10 +59,7 @@ class ListTodosActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@ListTodosActivity)
             todoListAdapter.updateList(DataSourceLocal.getAllTodos())
         }
-
-
     }
-
 
     private fun detailTodo(todoId: Int, position: Int){
         val intent = Intent(this, DetailTodoActivity::class.java)
