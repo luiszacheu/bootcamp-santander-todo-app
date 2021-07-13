@@ -13,13 +13,13 @@ class DataSourceRemote {
 
     fun getAll() {
         Log.i("TESTE", "get all")
-        val call: Call<Todo> = client.service().getAllTodos()
-        call.enqueue(object : Callback<Todo> {
-            override fun onResponse(call: Call<Todo>, response: Response<Todo>) {
+        val call: Call<List<Todo>> = client.service().getAllTodos()
+        call.enqueue(object : Callback<List<Todo>> {
+            override fun onResponse(call: Call<List<Todo>>, response: Response<List<Todo>>) {
                 Log.i("TESTE", "SUCESSO")
             }
 
-            override fun onFailure(call: Call<Todo>, t: Throwable) {
+            override fun onFailure(call: Call<List<Todo>>, t: Throwable) {
                 Log.i("TESTE", "FALHA")
             }
         })
