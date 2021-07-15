@@ -31,7 +31,7 @@ class ListTodosActivity : AppCompatActivity() {
             }
             Constants.CODE_RESULT_REMOVE_SUCCESS -> {
                 result.data?.getIntExtra(Constants.KEY_EXTRA_TODO_INDEX, 0)?.let {
-                    todoListAdapter.removeTodo(it)
+                    updateList()
                 }
             }
         }

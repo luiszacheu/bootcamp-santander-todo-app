@@ -30,10 +30,6 @@ class TodoListAdapter(
         notifyDataSetChanged()
     }
 
-    fun removeTodo(position: Int) {
-        notifyItemRemoved(position)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = AdapterTodoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding, onClick)
