@@ -2,22 +2,22 @@ package bootcamp.snt.bootcampsantandertodo.features.data
 
 import bootcamp.snt.bootcampsantandertodo.features.model.Todo
 
-object DataSourceLocal {
+object DataSourceLocal : DataSource {
     private val todoList = initialList()
 
-    fun getAllTodos() : MutableList<Todo> {
+    override fun getAllTodos() : MutableList<Todo> {
         return todoList
     }
 
-    fun removeTodo(todo: Todo) {
+    override fun removeTodo(todo: Todo) {
         todoList.remove(todo)
     }
 
-    fun getTodoById(id: Int): Todo {
+    override fun getTodoById(id: Int): Todo {
         return todoList.single { it.id == id }
     }
 
-    fun createTodo(newTodo: Todo){
+    override fun createTodo(newTodo: Todo){
         todoList.add(newTodo)
     }
 
