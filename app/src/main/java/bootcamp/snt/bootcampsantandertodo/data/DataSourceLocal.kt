@@ -5,7 +5,7 @@ import bootcamp.snt.bootcampsantandertodo.model.Todo
 object DataSourceLocal {
     private val todoList = initialList()
 
-    fun getAllTodos() : MutableList<Todo> {
+    fun getAllTodos() : List<Todo> {
         return todoList
     }
 

@@ -10,7 +10,7 @@ class TodoListAdapter(
     private val onClick: (Todo, Int) -> Unit
 ) : RecyclerView.Adapter<TodoListAdapter.ViewHolder>() {
 
-    private var todoList = mutableListOf<Todo>()
+    private var todoList = listOf<Todo>()
 
     inner class ViewHolder(private val binding: AdapterTodoBinding, val onClick: (Todo, Int) -> Unit) : RecyclerView.ViewHolder(binding.root) {
         fun bind(todo: Todo, position: Int){
@@ -25,7 +25,7 @@ class TodoListAdapter(
         }
     }
 
-    fun updateList(listOfTodos: MutableList<Todo>) {
+    fun updateList(listOfTodos: List<Todo>) {
         todoList = listOfTodos
     }
 

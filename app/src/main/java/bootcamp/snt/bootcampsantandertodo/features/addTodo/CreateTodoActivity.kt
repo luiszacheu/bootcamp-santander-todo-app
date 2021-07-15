@@ -1,10 +1,14 @@
 package bootcamp.snt.bootcampsantandertodo.features.addTodo
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import bootcamp.snt.bootcampsantandertodo.R
 import bootcamp.snt.bootcampsantandertodo.databinding.ActivityCreateTodoBinding
 import bootcamp.snt.bootcampsantandertodo.data.DataSourceLocal
+import bootcamp.snt.bootcampsantandertodo.data.DataSourceRemote
+import bootcamp.snt.bootcampsantandertodo.data.TodoCallback
+import bootcamp.snt.bootcampsantandertodo.data.TodosCallback
 import bootcamp.snt.bootcampsantandertodo.model.Todo
 import bootcamp.snt.bootcampsantandertodo.utils.Constants
 import java.util.*
@@ -60,9 +64,20 @@ class CreateTodoActivity : AppCompatActivity() {
 
     private fun createNewTodo(title: String, description: String) {
         val todo = Todo(Random(100L).nextInt(), title, description, false)
-        DataSourceLocal.createTodo(todo)
-        setResult(Constants.CODE_RESULT_CREATE_SUCCESS)
-        finish()
+//        Local
+//        DataSourceLocal.createTodo(todo)
+
+//        Remoto
+        DataSourceRemote().create(todo, object : TodoCallback {
+            override fun onSucesso(todos: Todo?) {
+                setResult(Constants.CODE_RESULT_CREATE_SUCCESS)
+                finish()
+            }
+
+            override fun onFalha(t: Throwable) {
+                Toast.makeText(this@CreateTodoActivity, "Falha na busca", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }
 

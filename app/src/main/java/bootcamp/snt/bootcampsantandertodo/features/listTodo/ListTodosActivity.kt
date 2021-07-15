@@ -2,15 +2,17 @@ package bootcamp.snt.bootcampsantandertodo.features.listTodo
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import bootcamp.snt.bootcampsantandertodo.R
 import bootcamp.snt.bootcampsantandertodo.databinding.ActivityListTodoBinding
-import bootcamp.snt.bootcampsantandertodo.data.DataSourceLocal
 import bootcamp.snt.bootcampsantandertodo.data.DataSourceRemote
+import bootcamp.snt.bootcampsantandertodo.data.TodosCallback
 import bootcamp.snt.bootcampsantandertodo.features.addTodo.CreateTodoActivity
 import bootcamp.snt.bootcampsantandertodo.features.detailTodo.DetailTodoActivity
+import bootcamp.snt.bootcampsantandertodo.model.Todo
 import bootcamp.snt.bootcampsantandertodo.utils.Constants
 
 class ListTodosActivity : AppCompatActivity() {
@@ -41,8 +43,6 @@ class ListTodosActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        DataSourceRemote().getAll()
-
         binding.toolbar.title = getString(R.string.app_name)
 
         //Adicionando evento de click no botão para adicionar nova tarefa
@@ -60,7 +60,22 @@ class ListTodosActivity : AppCompatActivity() {
         binding.rvListTodos.apply {
             adapter = todoListAdapter
             layoutManager = LinearLayoutManager(this@ListTodosActivity)
-            todoListAdapter.updateList(DataSourceLocal.getAllTodos())
+
+//            Local
+//            todoListAdapter.updateList(DataSourceLocal.getAllTodos())
+
+//            Remoto
+            DataSourceRemote().getAll(object : TodosCallback {
+                override fun onSucesso(todos: List<Todo>?) {
+                    todos?.let {
+                        todoListAdapter.updateList(it)
+                    }
+                }
+
+                override fun onFalha(t: Throwable) {
+                    Toast.makeText(this@ListTodosActivity, "Falha na criação", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
     }
 
