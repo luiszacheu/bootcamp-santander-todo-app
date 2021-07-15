@@ -31,7 +31,8 @@ class TodoListAdapter(
     }
 
     fun removeTodo(position: Int) {
-        notifyItemRemoved(position)
+        notifyDataSetChanged()
+        todoList.removeAt(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

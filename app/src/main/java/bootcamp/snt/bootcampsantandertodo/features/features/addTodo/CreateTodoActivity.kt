@@ -61,7 +61,7 @@ class CreateTodoActivity : AppCompatActivity() {
     }
 
     private fun createNewTodo(title: String, description: String) {
-        val todo = Todo(Random(100L).nextInt(), title, description, false)
+        val todo = Todo(Random().nextInt(), title, description, false)
         DataSourceLocal.createTodo(todo)
         setResult(Constants.CODE_RESULT_CREATE_SUCCESS)
         finish()

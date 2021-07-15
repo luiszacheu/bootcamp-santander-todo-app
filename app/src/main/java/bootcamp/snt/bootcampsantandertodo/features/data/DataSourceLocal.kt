@@ -18,7 +18,7 @@ object DataSourceLocal {
     }
 
     fun createTodo(newTodo: Todo){
-        todoList.add(0, newTodo)
+        todoList.add(newTodo)
     }
 
     private fun initialList() : MutableList<Todo> {
