@@ -26,7 +26,9 @@ class ListTodosActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()) { result ->
 
         when(result.resultCode) {
-            Constants.CODE_RESULT_CREATE_SUCCESS -> todoListAdapter.notifyDataSetChanged()
+            Constants.CODE_RESULT_CREATE_SUCCESS -> {
+                updateList()
+            }
             Constants.CODE_RESULT_REMOVE_SUCCESS -> {
                 result.data?.getIntExtra(Constants.KEY_EXTRA_TODO_INDEX, 0)?.let {
                     todoListAdapter.removeTodo(it)
@@ -61,22 +63,26 @@ class ListTodosActivity : AppCompatActivity() {
             adapter = todoListAdapter
             layoutManager = LinearLayoutManager(this@ListTodosActivity)
 
+            updateList()
+        }
+    }
+
+    private fun updateList() {
 //            Local
 //            todoListAdapter.updateList(DataSourceLocal.getAllTodos())
 
 //            Remoto
-            DataSourceRemote().getAll(object : TodosCallback {
-                override fun onSucesso(todos: List<Todo>?) {
-                    todos?.let {
-                        todoListAdapter.updateList(it)
-                    }
+        DataSourceRemote().getAll(object : TodosCallback {
+            override fun onSucesso(todos: List<Todo>?) {
+                todos?.let {
+                    todoListAdapter.updateList(it)
                 }
+            }
 
-                override fun onFalha(t: Throwable) {
-                    Toast.makeText(this@ListTodosActivity, "Falha na criação", Toast.LENGTH_SHORT).show()
-                }
-            })
-        }
+            override fun onFalha(t: Throwable) {
+                Toast.makeText(this@ListTodosActivity, "Falha na criação", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun detailTodo(todoId: Int, position: Int){

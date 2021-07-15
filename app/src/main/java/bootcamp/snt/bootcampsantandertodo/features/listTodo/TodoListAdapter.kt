@@ -27,6 +27,7 @@ class TodoListAdapter(
 
     fun updateList(listOfTodos: List<Todo>) {
         todoList = listOfTodos
+        notifyDataSetChanged()
     }
 
     fun removeTodo(position: Int) {
