@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import bootcamp.snt.bootcampsantandertodo.R
 import bootcamp.snt.bootcampsantandertodo.databinding.ActivityListTodoBinding
@@ -12,6 +14,7 @@ import bootcamp.snt.bootcampsantandertodo.data.DataSourceRemote
 import bootcamp.snt.bootcampsantandertodo.data.TodosCallback
 import bootcamp.snt.bootcampsantandertodo.features.addTodo.CreateTodoActivity
 import bootcamp.snt.bootcampsantandertodo.features.detailTodo.DetailTodoActivity
+import bootcamp.snt.bootcampsantandertodo.features.listTodo.viewmodel.ListTodosViewModel
 import bootcamp.snt.bootcampsantandertodo.model.Todo
 import bootcamp.snt.bootcampsantandertodo.utils.Constants
 
@@ -22,19 +25,8 @@ class ListTodosActivity : AppCompatActivity() {
 
     private lateinit var todoListAdapter: TodoListAdapter
 
-    private val createActivityLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()) { result ->
-
-        when(result.resultCode) {
-            Constants.CODE_RESULT_CREATE_SUCCESS -> {
-                updateList()
-            }
-            Constants.CODE_RESULT_REMOVE_SUCCESS -> {
-                result.data?.getIntExtra(Constants.KEY_EXTRA_TODO_INDEX, 0)?.let {
-                    updateList()
-                }
-            }
-        }
+    private val viewModel: ListTodosViewModel by lazy {
+        ViewModelProvider(this).get(ListTodosViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,27 +54,16 @@ class ListTodosActivity : AppCompatActivity() {
         binding.rvListTodos.apply {
             adapter = todoListAdapter
             layoutManager = LinearLayoutManager(this@ListTodosActivity)
-
-            updateList()
         }
-    }
 
-    private fun updateList() {
-//            Local
-//            todoListAdapter.updateList(DataSourceLocal.getAllTodos())
-
-//            Remoto
-        DataSourceRemote().getAll(object : TodosCallback {
-            override fun onSucesso(todos: List<Todo>?) {
-                todos?.let {
-                    todoListAdapter.updateList(it)
-                }
-            }
-
-            override fun onFalha(t: Throwable) {
+        viewModel.listTodos.observe(this, Observer { listTodos ->
+            if (listTodos != null) {
+                todoListAdapter.updateList(listTodos)
+            } else {
                 Toast.makeText(this@ListTodosActivity, "Falha na criação", Toast.LENGTH_SHORT).show()
             }
         })
+        viewModel.getAllTodos()
     }
 
     private fun detailTodo(todoId: Int, position: Int){
@@ -92,4 +73,18 @@ class ListTodosActivity : AppCompatActivity() {
         createActivityLauncher.launch(intent)
     }
 
+    private val createActivityLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) { result ->
+
+        when(result.resultCode) {
+            Constants.CODE_RESULT_CREATE_SUCCESS -> {
+                viewModel.getAllTodos()
+            }
+            Constants.CODE_RESULT_REMOVE_SUCCESS -> {
+                result.data?.getIntExtra(Constants.KEY_EXTRA_TODO_INDEX, 0)?.let {
+                    viewModel.getAllTodos()
+                }
+            }
+        }
+    }
 }
