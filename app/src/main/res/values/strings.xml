@@ -14,6 +14,7 @@
     <!--    Tela detalhe da tarefa   -->
     <string name="detail_todo_tv_header_text">#%2$d - %1$s</string>
     <string name="remove_todo">Remover Tarefa</string>
+    <string name="text_loading">Carregando...</string>
 
 
 </resources>

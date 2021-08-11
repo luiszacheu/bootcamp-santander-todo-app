@@ -2,6 +2,7 @@ package bootcamp.snt.bootcampsantandertodo.features.listTodo
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import bootcamp.snt.bootcampsantandertodo.data.TodosCallback
 import bootcamp.snt.bootcampsantandertodo.features.addTodo.CreateTodoActivity
 import bootcamp.snt.bootcampsantandertodo.features.detailTodo.DetailTodoActivity
 import bootcamp.snt.bootcampsantandertodo.features.listTodo.viewmodel.ListTodosViewModel
+import bootcamp.snt.bootcampsantandertodo.model.StateView
 import bootcamp.snt.bootcampsantandertodo.model.Todo
 import bootcamp.snt.bootcampsantandertodo.utils.Constants
 
@@ -56,13 +58,23 @@ class ListTodosActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@ListTodosActivity)
         }
 
-        viewModel.listTodos.observe(this, Observer { listTodos ->
-            if (listTodos != null) {
-                todoListAdapter.updateList(listTodos)
-            } else {
-                Toast.makeText(this@ListTodosActivity, "Falha na criação", Toast.LENGTH_SHORT).show()
+
+        viewModel.stateView.observe(this, Observer {  stateView ->
+            when (stateView) {
+                is StateView.Loading -> {
+                    binding.layoutLoading.root.visibility = View.VISIBLE
+                }
+                is StateView.DataLoaded -> {
+                    binding.layoutLoading.root.visibility = View.GONE
+                    todoListAdapter.updateList(stateView.data)
+                }
+                is StateView.Error -> {
+                    binding.layoutLoading.root.visibility = View.GONE
+                    Toast.makeText(this@ListTodosActivity, stateView.e.message, Toast.LENGTH_SHORT).show()
+                }
             }
         })
+
         viewModel.getAllTodos()
     }
 
