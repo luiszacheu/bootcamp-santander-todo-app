@@ -5,10 +5,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import bootcamp.snt.bootcampsantandertodo.R
-import bootcamp.snt.bootcampsantandertodo.databinding.ActivityDetailTodoBinding
-import bootcamp.snt.bootcampsantandertodo.data.DataSourceLocal
 import bootcamp.snt.bootcampsantandertodo.data.DataSourceRemote
-import bootcamp.snt.bootcampsantandertodo.data.TodoCallback
+import bootcamp.snt.bootcampsantandertodo.data.repository.RepositoryCallback
+import bootcamp.snt.bootcampsantandertodo.databinding.ActivityDetailTodoBinding
 import bootcamp.snt.bootcampsantandertodo.model.Todo
 import bootcamp.snt.bootcampsantandertodo.utils.Constants
 
@@ -49,7 +48,7 @@ class DetailTodoActivity : AppCompatActivity() {
 //        DataSourceLocal.removeTodo(todo)
 
 //        Remoto
-        DataSourceRemote().remove(todo.id, object : TodoCallback {
+        DataSourceRemote().remove(todo.id, object : RepositoryCallback<Todo> {
             override fun onSucesso(todos: Todo?) {
                 val data = Intent()
                 data.putExtra(Constants.KEY_EXTRA_TODO_INDEX, position)
@@ -68,7 +67,7 @@ class DetailTodoActivity : AppCompatActivity() {
 //        todo = DataSourceLocal.getTodoById(idTodo)
 
 //        Remoto
-        DataSourceRemote().getById(idTodo, object : TodoCallback {
+        DataSourceRemote().getById(idTodo, object : RepositoryCallback<Todo> {
             override fun onSucesso(todos: Todo?) {
                 todos?.let {
                     todo = todos

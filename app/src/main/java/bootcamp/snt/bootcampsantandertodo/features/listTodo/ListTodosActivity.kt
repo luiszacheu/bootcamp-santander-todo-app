@@ -7,21 +7,17 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ReportFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import bootcamp.snt.bootcampsantandertodo.R
+import bootcamp.snt.bootcampsantandertodo.data.repository.TodoRepository
+import bootcamp.snt.bootcampsantandertodo.data.repository.TodoRepositoryImpl
 import bootcamp.snt.bootcampsantandertodo.databinding.ActivityListTodoBinding
-import bootcamp.snt.bootcampsantandertodo.data.DataSourceRemote
-import bootcamp.snt.bootcampsantandertodo.data.TodoRepository
-import bootcamp.snt.bootcampsantandertodo.data.TodoRepositoryImpl
-import bootcamp.snt.bootcampsantandertodo.data.TodosCallback
 import bootcamp.snt.bootcampsantandertodo.features.addTodo.CreateTodoActivity
 import bootcamp.snt.bootcampsantandertodo.features.detailTodo.DetailTodoActivity
 import bootcamp.snt.bootcampsantandertodo.features.listTodo.viewmodel.ListTodosViewModel
 import bootcamp.snt.bootcampsantandertodo.features.listTodo.viewmodel.ListTodosViewModelFactory
 import bootcamp.snt.bootcampsantandertodo.model.StateView
-import bootcamp.snt.bootcampsantandertodo.model.Todo
 import bootcamp.snt.bootcampsantandertodo.utils.Constants
 
 class ListTodosActivity : AppCompatActivity() {

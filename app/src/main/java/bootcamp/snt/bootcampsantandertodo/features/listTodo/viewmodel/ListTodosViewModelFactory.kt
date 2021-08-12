@@ -2,7 +2,7 @@ package bootcamp.snt.bootcampsantandertodo.features.listTodo.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import bootcamp.snt.bootcampsantandertodo.data.TodoRepository
+import bootcamp.snt.bootcampsantandertodo.data.repository.TodoRepository
 
 class ListTodosViewModelFactory(private val repository: TodoRepository)
     : ViewModelProvider.NewInstanceFactory() {

@@ -1,6 +1,7 @@
 package bootcamp.snt.bootcampsantandertodo.data
 
 import bootcamp.snt.bootcampsantandertodo.data.network.NetworkClient
+import bootcamp.snt.bootcampsantandertodo.data.repository.RepositoryCallback
 import bootcamp.snt.bootcampsantandertodo.model.Todo
 import retrofit2.Call
 import retrofit2.Callback
@@ -10,7 +11,7 @@ class DataSourceRemote {
 
     private val service = NetworkClient().service()
 
-    fun getAll(callback: TodosCallback) {
+    fun getAll(callback: RepositoryCallback<List<Todo>>) {
 
         val call: Call<List<Todo>> = service.getAllTodos()
         call.enqueue(object : Callback<List<Todo>> {
@@ -24,7 +25,7 @@ class DataSourceRemote {
         })
     }
 
-    fun getById(id: Int, callback: TodoCallback) {
+    fun getById(id: Int, callback: RepositoryCallback<Todo>) {
         val call: Call<Todo> = service.getTodoById(id)
 
         call.enqueue(object : Callback<Todo> {
@@ -38,7 +39,7 @@ class DataSourceRemote {
         })
     }
 
-    fun create(todo: Todo, callback: TodoCallback) {
+    fun create(todo: Todo, callback: RepositoryCallback<Todo>) {
         val call = service.createTodo(todo)
         call.enqueue(object : Callback<Todo> {
             override fun onResponse(call: Call<Todo>, response: Response<Todo>) {
@@ -51,7 +52,7 @@ class DataSourceRemote {
         })
     }
 
-    fun remove(id: Int, callback: TodoCallback) {
+    fun remove(id: Int, callback: RepositoryCallback<Todo>) {
         val call = service.deleteTodoById(id)
         call.enqueue(object : Callback<Todo> {
             override fun onResponse(call: Call<Todo>, response: Response<Todo>) {
