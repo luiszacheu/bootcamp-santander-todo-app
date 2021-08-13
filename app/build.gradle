@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -56,6 +57,18 @@ dependencies {
 
     //Dependencia do GSON
     implementation "com.google.code.gson:gson:$versionGson"
+
+    //Room
+    implementation "androidx.room:room-runtime:$versionRoom"
+    kapt "androidx.room:room-compiler:$versionRoom"
+    implementation "androidx.room:room-ktx:$versionRoom"
+
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versionCoroutines"
+
+    //Koin
+    implementation "io.insert-koin:koin-android:$versionKoin"
+    implementation "io.insert-koin:koin-android-ext:$versionKoinExt"
 
     testImplementation "junit:junit:$versionJUnit"
     androidTestImplementation "androidx.test.ext:junit:$versionAndroidXJUnit"
