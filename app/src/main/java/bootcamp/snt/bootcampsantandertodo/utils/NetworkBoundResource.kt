@@ -1,6 +1,5 @@
 package bootcamp.snt.bootcampsantandertodo.utils
 
-import bootcamp.snt.bootcampsantandertodo.model.StateView
 import kotlinx.coroutines.flow.*
 
 /**
