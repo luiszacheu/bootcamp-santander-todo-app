@@ -27,7 +27,7 @@ val localDataModule = module {
     }
 
     single<TodoRepository> {
-        TodoRepositoryImpl()
+        TodoRepositoryImpl(get(), get())
     }
 }
 
