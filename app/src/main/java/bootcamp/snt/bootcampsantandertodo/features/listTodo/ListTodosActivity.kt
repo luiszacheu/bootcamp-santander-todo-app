@@ -2,23 +2,18 @@ package bootcamp.snt.bootcampsantandertodo.features.listTodo
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import bootcamp.snt.bootcampsantandertodo.R
-import bootcamp.snt.bootcampsantandertodo.data.repository.TodoRepository
-import bootcamp.snt.bootcampsantandertodo.data.repository.TodoRepositoryImpl
 import bootcamp.snt.bootcampsantandertodo.databinding.ActivityListTodoBinding
 import bootcamp.snt.bootcampsantandertodo.features.addTodo.CreateTodoActivity
 import bootcamp.snt.bootcampsantandertodo.features.detailTodo.DetailTodoActivity
 import bootcamp.snt.bootcampsantandertodo.features.listTodo.viewmodel.ListTodosViewModel
-import bootcamp.snt.bootcampsantandertodo.features.listTodo.viewmodel.ListTodosViewModelFactory
-import bootcamp.snt.bootcampsantandertodo.model.StateView
 import bootcamp.snt.bootcampsantandertodo.utils.Constants
+import bootcamp.snt.bootcampsantandertodo.utils.Resource
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListTodosActivity : AppCompatActivity() {
 
@@ -27,13 +22,7 @@ class ListTodosActivity : AppCompatActivity() {
 
     private lateinit var todoListAdapter: TodoListAdapter
 
-    private val repository: TodoRepository by lazy {
-        TodoRepositoryImpl()
-    }
-
-    private val viewModel: ListTodosViewModel by lazy {
-        ViewModelProvider(this, ListTodosViewModelFactory(repository)).get(ListTodosViewModel::class.java)
-    }
+    private val listViewModel: ListTodosViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,29 +46,17 @@ class ListTodosActivity : AppCompatActivity() {
         }
 
         // Instanciando RecyclerView e passando uma lista de itens iniciais
-        binding.rvListTodos.apply {
-            adapter = todoListAdapter
-            layoutManager = LinearLayoutManager(this@ListTodosActivity)
-        }
-
-
-        viewModel.stateView.observe(this, Observer {  stateView ->
-            when (stateView) {
-                is StateView.Loading -> {
-                    binding.layoutLoading.root.visibility = View.VISIBLE
-                }
-                is StateView.DataLoaded -> {
-                    binding.layoutLoading.root.visibility = View.GONE
-                    todoListAdapter.updateList(stateView.data)
-                }
-                is StateView.Error -> {
-                    binding.layoutLoading.root.visibility = View.GONE
-                    Toast.makeText(this@ListTodosActivity, stateView.e.message, Toast.LENGTH_SHORT).show()
-                }
+        binding.apply {
+            rvListTodos.apply {
+                adapter = todoListAdapter
+                layoutManager = LinearLayoutManager(this@ListTodosActivity)
             }
-        })
 
-        viewModel.getAllTodos()
+            listViewModel.todos.observe(this@ListTodosActivity, { result ->
+                todoListAdapter.updateList(result.data!!)
+                layoutLoading.root.isVisible = result is Resource.Loading && result.data.isNullOrEmpty()
+            })
+        }
     }
 
     private fun detailTodo(todoId: Int, position: Int){
@@ -94,11 +71,13 @@ class ListTodosActivity : AppCompatActivity() {
 
         when(result.resultCode) {
             Constants.CODE_RESULT_CREATE_SUCCESS -> {
-                viewModel.getAllTodos()
+                //viewModel.getAllTodos()
+                listViewModel.todos
             }
             Constants.CODE_RESULT_REMOVE_SUCCESS -> {
                 result.data?.getIntExtra(Constants.KEY_EXTRA_TODO_INDEX, 0)?.let {
-                    viewModel.getAllTodos()
+                    //viewModel.getAllTodos()
+                    listViewModel.todos
                 }
             }
         }

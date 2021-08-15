@@ -11,7 +11,7 @@ interface ApiService {
     fun createTodo(@Body todo: Todo) : Call<Todo>
 
     @GET("todos")
-    fun getAllTodos() : List<Todo>
+    suspend fun getAllTodos() : List<Todo>
 
     @GET("todos/{id}")
     fun getTodoById(@Path("id") id: Int) : Call<Todo>
