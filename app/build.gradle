@@ -44,8 +44,8 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$versionConstraintLayout"
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleExtensionsVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleExtensionsVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion"
 
     //Dependencias do Retrofit

@@ -5,10 +5,7 @@ import bootcamp.snt.bootcampsantandertodo.model.Todo
 
 class TodoRepositoryImpl : TodoRepository {
     override fun getAll(callback: RepositoryCallback<List<Todo>>) {
-        //      Local
-//      todoListAdapter.updateList(DataSourceLocal.getAllTodos())
 
-//      Remote
         DataSourceRemote().getAll(object : RepositoryCallback<List<Todo>> {
             override fun onSucesso(todos: List<Todo>?) {
                 todos?.let {

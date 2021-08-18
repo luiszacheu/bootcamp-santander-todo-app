@@ -6,8 +6,8 @@ ext {
     versionConstraintLayout = '2.1.0'
     versionJUnit = '4.13.2'
 
-    //Architecture Components
-    lifecycleVersion = '2.0.0'
+    //Architecture Components Lifecycle
+    lifecycleVersion = '2.3.1'
     lifecycleExtensionsVersion = '2.2.0'
 
     //Retrofit
