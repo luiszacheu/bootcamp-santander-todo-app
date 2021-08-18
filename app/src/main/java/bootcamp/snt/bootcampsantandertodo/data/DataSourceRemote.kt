@@ -11,19 +11,7 @@ class DataSourceRemote {
 
     private val service = NetworkClient().service()
 
-    fun getAll(callback: RepositoryCallback<List<Todo>>) {
-
-        val call: Call<List<Todo>> = service.getAllTodos()
-        call.enqueue(object : Callback<List<Todo>> {
-            override fun onResponse(call: Call<List<Todo>>, response: Response<List<Todo>>) {
-                callback.onSucesso(response.body())
-            }
-
-            override fun onFailure(call: Call<List<Todo>>, t: Throwable) {
-                callback.onFalha(t)
-            }
-        })
-    }
+    suspend fun getAll() =  service.getAllTodos()
 
     fun getById(id: Int, callback: RepositoryCallback<Todo>) {
         val call: Call<Todo> = service.getTodoById(id)
