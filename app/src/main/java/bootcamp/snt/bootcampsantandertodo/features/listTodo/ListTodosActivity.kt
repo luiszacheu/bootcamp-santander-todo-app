@@ -62,7 +62,6 @@ class ListTodosActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@ListTodosActivity)
         }
 
-
         viewModel.stateView.observe(this, Observer {  stateView ->
             when (stateView) {
                 is StateView.Loading -> {
