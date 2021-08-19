@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import bootcamp.snt.bootcampsantandertodo.data.repository.RepositoryCallback
+import bootcamp.snt.bootcampsantandertodo.data.repository.ResultRepository
 import bootcamp.snt.bootcampsantandertodo.data.repository.TodoRepository
 import bootcamp.snt.bootcampsantandertodo.model.StateView
 import bootcamp.snt.bootcampsantandertodo.model.Todo
@@ -24,12 +25,20 @@ class ListTodosViewModel(private val repository: TodoRepository) : ViewModel() {
 
         viewModelScope.launch {
             _stateView.value = StateView.Loading
-            val result = repository.getAll()
-            if (result.isNotEmpty()) {
-                _stateView.value = StateView.DataLoaded(result)
-            } else {
-                _stateView.value =
-                    StateView.Error(Exception("Ocorreu um erro ao recuperar os dados!"))
+            val result = try {
+                repository.getAll()
+            } catch (e: Exception) {
+                ResultRepository.Error(java.lang.Exception("error"))
+            }
+
+            when(result) {
+                is ResultRepository.Success -> {
+                    _stateView.value = StateView.DataLoaded(result.data)
+                }
+                is ResultRepository.Error -> {
+                    _stateView.value =
+                        StateView.Error(Exception("Ocorreu um erro ao recuperar os dados!"))
+                }
             }
         }
     }
