@@ -1,12 +1,15 @@
 package bootcamp.snt.bootcampsantandertodo.features.detailTodo
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import bootcamp.snt.bootcampsantandertodo.data.DataSourceRemote
 import bootcamp.snt.bootcampsantandertodo.data.repository.RepositoryCallback
 import bootcamp.snt.bootcampsantandertodo.model.StateView
 import bootcamp.snt.bootcampsantandertodo.model.Todo
+import kotlinx.coroutines.launch
 
 class DetailTodoViewModel : ViewModel() {
 
@@ -20,19 +23,24 @@ class DetailTodoViewModel : ViewModel() {
 
     fun showDataFromDataSource(idTodo: Int) {
 
-        DataSourceRemote().getById(idTodo, object : RepositoryCallback<Todo> {
-            override fun onSucesso(todos: Todo?) {
-                todos?.let {
-                    _getStateView.value = StateView.DataLoaded(todos)
-                } ?: run {
-                    _getStateView.value = StateView.Error(Exception("Item retornado vazio!"))
-                }
-            }
+        viewModelScope.launch {
+            val todo = DataSourceRemote().getById(222)
+            Log.e("TESTE", "")
+        }
 
-            override fun onFalha(t: Throwable) {
-                _getStateView.value = StateView.Error(Exception("Ocorreu falha ao obter o item!"))
-            }
-        })
+//        DataSourceRemote().getById(idTodo, object : RepositoryCallback<Todo> {
+//            override fun onSucesso(todos: Todo?) {
+//                todos?.let {
+//                    _getStateView.value = StateView.DataLoaded(todos)
+//                } ?: run {
+//                    _getStateView.value = StateView.Error(Exception("Item retornado vazio!"))
+//                }
+//            }
+//
+//            override fun onFalha(t: Throwable) {
+//                _getStateView.value = StateView.Error(Exception("Ocorreu falha ao obter o item!"))
+//            }
+//        })
     }
 
     fun removeTodo(todo: Todo) {

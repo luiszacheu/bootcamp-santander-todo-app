@@ -14,7 +14,7 @@ interface ApiService {
     suspend fun getAllTodos() : List<Todo>
 
     @GET("todos/{id}")
-    fun getTodoById(@Path("id") id: Int) : Call<Todo>
+    suspend fun getTodoById(@Path("id") id: Int) : Todo
 
     @PUT("todos/{id}")
     fun updateTodoById(@Path("id") id: Int, @Body novoTodo: Todo) : Call<Todo>

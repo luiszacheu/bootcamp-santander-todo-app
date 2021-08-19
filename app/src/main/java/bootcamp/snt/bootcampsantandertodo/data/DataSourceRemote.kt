@@ -11,20 +11,10 @@ class DataSourceRemote {
 
     private val service = NetworkClient().service()
 
-    suspend fun getAll() =  service.getAllTodos()
+    suspend fun getAll() = service.getAllTodos()
 
-    fun getById(id: Int, callback: RepositoryCallback<Todo>) {
-        val call: Call<Todo> = service.getTodoById(id)
-
-        call.enqueue(object : Callback<Todo> {
-            override fun onResponse(call: Call<Todo>, response: Response<Todo>) {
-                callback.onSucesso(response.body())
-            }
-
-            override fun onFailure(call: Call<Todo>, t: Throwable) {
-                callback.onFalha(t)
-            }
-        })
+    suspend fun getById(id: Int) : Todo {
+        return service.getTodoById(id)
     }
 
     fun create(todo: Todo, callback: RepositoryCallback<Todo>) {
