@@ -10,7 +10,7 @@ class TodoRepositoryImpl : TodoRepository {
         return if (result.isNotEmpty()) {
             Result.Success(result)
         } else {
-            Result.Error("Falha")
+            Result.Error(Exception("Falha"))
         }
 
 //        object : RepositoryCallback<List<Todo>> {
