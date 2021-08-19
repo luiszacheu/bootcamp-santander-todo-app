@@ -15,7 +15,6 @@ class ListTodosViewModel(private val repository: TodoRepository) : ViewModel() {
         get() = _stateView
 
     fun getAllTodos() {
-        if (_stateView.value != null) return
         _stateView.value = StateView.Loading
 
         repository.getAll(object : RepositoryCallback<List<Todo>> {
